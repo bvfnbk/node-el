@@ -1,3 +1,6 @@
 # IDE Stuff; i should not need this...
 .idea/
 *.iml
+
+# Node Stuff
+node_modules
