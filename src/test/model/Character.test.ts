@@ -22,6 +22,18 @@ test('Character: correctly detects whitespace characters.', () => {
     ).not.toContain(true);
 });
 
+test('Character: correctly detects opening bracket.', () => {
+    expect(new Character('(').isOpeningBracket()).toBeTruthy();
+    expect(new Character('a').isOpeningBracket()).toBeFalsy();
+    expect(new Character(')').isOpeningBracket()).toBeFalsy();
+});
+
+test('Character: correctly detects closing bracket.', () => {
+    expect(new Character(')').isClosingBracket()).toBeTruthy();
+    expect(new Character('a').isClosingBracket()).toBeFalsy();
+    expect(new Character('(').isClosingBracket()).toBeFalsy();
+});
+
 test('Character: correctly splits string.', () => {
     expect(Character.splitString('')).toEqual([]);
     expect(Character.splitString('a')).toEqual([new Character('a')]);

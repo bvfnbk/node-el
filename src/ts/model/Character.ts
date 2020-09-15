@@ -14,6 +14,14 @@ export default class Character {
         return (this.value.match(/\s/) !== null);
     }
 
+    public isOpeningBracket(): boolean {
+        return this.value === '(';
+    }
+
+    public isClosingBracket(): boolean {
+        return this.value === ')';
+    }
+
     public static splitString(value: string): Character[] {
         return [...value].map(character => new Character(character));
     }
