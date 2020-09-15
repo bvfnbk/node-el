@@ -13,4 +13,8 @@ export default class Character {
     public isWhitespace(): boolean {
         return (this.value.match(/\s/) !== null);
     }
+
+    public static splitString(value: string): Character[] {
+        return [...value].map(character => new Character(character));
+    }
 }

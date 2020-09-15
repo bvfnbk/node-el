@@ -22,3 +22,9 @@ test('Character: correctly detects whitespace characters.', () => {
     ).not.toContain(true);
 });
 
+test('Character: correctly splits string.', () => {
+    expect(Character.splitString('')).toEqual([]);
+    expect(Character.splitString('a')).toEqual([new Character('a')]);
+    expect(Character.splitString('ab')).toEqual([new Character('a'), new Character('b')]);
+});
+
