@@ -11,12 +11,12 @@ test('Character: constructor accepts only single character strings as arguments.
 
 test('Character: correctly detects whitespace characters.', () => {
     expect(
-        [ '\t', '\n', '\l', '\r', ' ']
+        ['\t', '\v', '\n', '\r', ' ']
             .map(char => new Character(char))
             .map(char => char.isWhitespace())
     ).not.toContain(false);
     expect(
-        [ 'a', 'b', 'c', 'd', '(', '\'', ')', '.']
+        ['a', 'b', 'c', 'd', '(', '\'', ')', '.']
             .map(char => new Character(char))
             .map(char => char.isWhitespace())
     ).not.toContain(true);

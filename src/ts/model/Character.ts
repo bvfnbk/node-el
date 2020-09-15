@@ -11,15 +11,6 @@ export default class Character {
     }
 
     public isWhitespace(): boolean {
-        switch (this.value) {
-            case '\t':
-            case '\n':
-            case '\l':
-            case '\r':
-            case ' ':
-                return true;
-            default:
-                return false;
-        }
+        return (this.value.match(/\s/) !== null);
     }
 }
