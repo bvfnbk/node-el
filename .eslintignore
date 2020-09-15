@@ -1,6 +1,3 @@
 node_modules
 dist
 coverage
-package.json
-package-lock.json
-tsconfig.json
