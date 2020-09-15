@@ -11,6 +11,14 @@
     "typescript",
     "node"
   ],
+  "homepage": "https://github.com/bvfnbk/node-el",
+  "bugs": {
+    "url": "https://github.com/bvfnbk/node-el/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvfnbk/node-el.git"
+  },
   "author": "bvfnbk@web.de",
   "license": "Apache-2.0",
   "devDependencies": {
