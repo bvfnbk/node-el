@@ -13,5 +13,13 @@ module.exports = {
     ],
     rules: {
         quotes: ['error', 'single']
-    }
+    },
+    overrides: [
+        {
+            files: ['**/*.json'],
+            rules: {
+                quotes: ['error', 'double']
+            }
+        }
+    ]
 };
