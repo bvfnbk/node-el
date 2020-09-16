@@ -1,8 +1,11 @@
 import {evaluate} from '../ts';
 
-test('String literals are correctly evaluated.', () => {
-    expect(evaluate('"literal"')).toEqual('literal');
-    expect(evaluate('\'literal\'')).toEqual('literal');
+test('Double quoted string literals are correctly evaluated.', () => {
+    expect(evaluate('"a string literal"')).toEqual('a string literal');
+});
+
+test('Single quoted string literals are correctly evaluated.', () => {
+    expect(evaluate('\'another string literal\'')).toEqual('another string literal');
 });
 
 test('Number literals are correctly evaluated.', () => {
