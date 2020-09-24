@@ -4,5 +4,9 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest'
     },
-    coverageReporters: ['clover']
+    collectCoverageFrom: [
+        '**/*.ts',
+        '!**/node_modules/**'
+    ],
+    coverageReporters: ['lcov', 'clover']
 };
