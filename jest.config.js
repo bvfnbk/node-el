@@ -3,5 +3,6 @@ module.exports = {
     testMatch: ['**/test/**/?(*.)+(test)\\.(ts|tsx|js)'],
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest'
-    }
+    },
+    coverageReporters: ['lcov']
 };
