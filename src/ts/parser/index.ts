@@ -1,4 +1,3 @@
-import Token from './Token';
 import {ASTNodeVisitor} from './ast';
 import ExpressionLanguageParser from './ExpressionLanguageParser';
 import ChevrotainParserFactory from './vendor/ChevrotainParserFactory';
@@ -10,7 +9,7 @@ import DefaultASTVisitor from './DefaultASTVisitor';
  */
 function createParser(): ExpressionLanguageParser {
     const parserFactory = new ChevrotainParserFactory();
-    return parserFactory.create(Token.all());
+    return parserFactory.create();
 }
 
 /**
