@@ -3,33 +3,33 @@ import ExpressionLanguageParser from '../ExpressionLanguageParser';
 import {createToken, Lexer, TokenType} from 'chevrotain';
 import TokenNameMap from './TokenNameMap';
 import ChevrotainASTParser from './ChevrotainASTParser';
-import LexerTokens from './LexerTokens';
+import LexerToken from './LexerToken';
 
 export default class ChevrotainParserFactory implements ParserFactory {
     create(): ExpressionLanguageParser {
         const tokens = [
             createToken({
-                name: LexerTokens.DOUBLE_QUOTED_STRING_LITERAL,
+                name: LexerToken.DOUBLE_QUOTED_STRING_LITERAL,
                 pattern: /"(:?[^\\"]|\\(:?[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/
             }),
             createToken({
-                name: LexerTokens.SINGLE_QUOTED_STRING_LITERAL,
+                name: LexerToken.SINGLE_QUOTED_STRING_LITERAL,
                 pattern: /'(:?[^\\']|\\(:?[bfnrtv'\\/]|u[0-9a-fA-F]{4}))*'/
             }),
             createToken({
-                name: LexerTokens.NUMBER_LITERAL,
+                name: LexerToken.NUMBER_LITERAL,
                 pattern: /-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/
             }),
             createToken({
-                name: LexerTokens.IDENTIFIER,
+                name: LexerToken.IDENTIFIER,
                 pattern: /[a-zA-Z]+/
             }),
             createToken({
-                name: LexerTokens.UNDERSCORE,
+                name: LexerToken.UNDERSCORE,
                 pattern: /_/
             }),
             createToken({
-                name: LexerTokens.WHITESPACE,
+                name: LexerToken.WHITESPACE,
                 pattern: /\s+/,
                 group: Lexer.SKIPPED
             })

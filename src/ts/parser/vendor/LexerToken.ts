@@ -1,7 +1,7 @@
 /**
  * Enumerate available token names.
  */
-enum LexerTokens {
+enum LexerToken {
     DOUBLE_QUOTED_STRING_LITERAL = 'DoubleQuotedStringLiteralToken',
     SINGLE_QUOTED_STRING_LITERAL = 'SingleQuotedStringLiteralToken',
     NUMBER_LITERAL = 'NumberLiteralToken',
@@ -10,4 +10,4 @@ enum LexerTokens {
     WHITESPACE = 'WhitespaceToken'
 }
 
-export default LexerTokens;
+export default LexerToken;

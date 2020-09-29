@@ -1,11 +1,11 @@
 import {ASTNode, ASTNumberLiteralNode, ASTStringLiteralNode} from '../ast';
-import LexerTokens from './LexerTokens';
+import LexerToken from './LexerToken';
 import {CstNode, IToken, TokenType} from 'chevrotain';
 import ExpressionLanguageParser from '../ExpressionLanguageParser';
 import TokenNameMap from './TokenNameMap';
 import ChevrotainLexer from './ChevrotainLexer';
 import ChevrotainCstParser from './ChevrotainCstParser';
-import ParserRules from './ParserRules';
+import ParserRule from './ParserRule';
 import ASTIdentifierNode from '../ast/ASTIdentifierNode';
 import ParserError from '../ParserError';
 import ASTUnderscoreNode from '../ast/ASTUnderscoreNode';
@@ -13,15 +13,15 @@ import ASTUnderscoreNode from '../ast/ASTUnderscoreNode';
 type CstChildrenDict = { [key: string]: CstNode | CstNode[] };
 type CstTokenDict = { [key: string]: IToken[] };
 
-function getParserRule(context: CstChildrenDict): ParserRules {
-    if (Object.prototype.hasOwnProperty.call(context, ParserRules.NUMBER_LITERAL)) {
-        return ParserRules.NUMBER_LITERAL;
-    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.STRING_LITERAL)) {
-        return ParserRules.STRING_LITERAL;
-    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.IDENTIFIER)) {
-        return ParserRules.IDENTIFIER;
-    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.UNDERSCORE)) {
-        return ParserRules.UNDERSCORE;
+function getParserRule(context: CstChildrenDict): ParserRule {
+    if (Object.prototype.hasOwnProperty.call(context, ParserRule.NUMBER_LITERAL)) {
+        return ParserRule.NUMBER_LITERAL;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRule.STRING_LITERAL)) {
+        return ParserRule.STRING_LITERAL;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRule.IDENTIFIER)) {
+        return ParserRule.IDENTIFIER;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRule.UNDERSCORE)) {
+        return ParserRule.UNDERSCORE;
     } else {
         throw new Error('Failed to parse context.');
     }
@@ -54,18 +54,18 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
             }
 
             stringLiteralRule(context: CstChildrenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, ParserRules.DOUBLE_QUOTED_STRING_LITERAL)) {
-                    return this.visit(context[ParserRules.DOUBLE_QUOTED_STRING_LITERAL]);
-                } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.SINGLE_QUOTED_STRING_LITERAL)) {
-                    return this.visit(context[ParserRules.SINGLE_QUOTED_STRING_LITERAL]);
+                if (Object.prototype.hasOwnProperty.call(context, ParserRule.DOUBLE_QUOTED_STRING_LITERAL)) {
+                    return this.visit(context[ParserRule.DOUBLE_QUOTED_STRING_LITERAL]);
+                } else if (Object.prototype.hasOwnProperty.call(context, ParserRule.SINGLE_QUOTED_STRING_LITERAL)) {
+                    return this.visit(context[ParserRule.SINGLE_QUOTED_STRING_LITERAL]);
                 } else {
                     throw new Error('Failed to parse context.');
                 }
             }
 
             doubleQuotedStringLiteralRule(context: CstTokenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, LexerTokens.DOUBLE_QUOTED_STRING_LITERAL)) {
-                    let contextElement: IToken[] = context[LexerTokens.DOUBLE_QUOTED_STRING_LITERAL];
+                if (Object.prototype.hasOwnProperty.call(context, LexerToken.DOUBLE_QUOTED_STRING_LITERAL)) {
+                    let contextElement: IToken[] = context[LexerToken.DOUBLE_QUOTED_STRING_LITERAL];
                     const value = contextElement[0].image;
                     return new ASTStringLiteralNode(value.slice(1, value.length - 1));
                 } else {
@@ -74,8 +74,8 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
             }
 
             singleQuotedStringLiteralRule(context: CstTokenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, LexerTokens.SINGLE_QUOTED_STRING_LITERAL)) {
-                    const value = context[LexerTokens.SINGLE_QUOTED_STRING_LITERAL][0].image;
+                if (Object.prototype.hasOwnProperty.call(context, LexerToken.SINGLE_QUOTED_STRING_LITERAL)) {
+                    const value = context[LexerToken.SINGLE_QUOTED_STRING_LITERAL][0].image;
                     return new ASTStringLiteralNode(value.slice(1, value.length - 1));
                 } else {
                     throw new Error('Failed to parse context.');
@@ -83,23 +83,23 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
             }
 
             numberLiteralRule(context: CstTokenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, LexerTokens.NUMBER_LITERAL)) {
-                    return new ASTNumberLiteralNode(Number(context[LexerTokens.NUMBER_LITERAL][0].image));
+                if (Object.prototype.hasOwnProperty.call(context, LexerToken.NUMBER_LITERAL)) {
+                    return new ASTNumberLiteralNode(Number(context[LexerToken.NUMBER_LITERAL][0].image));
                 } else {
                     throw new Error('Failed to parse context.');
                 }
             }
 
             identifierRule(context: CstTokenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, LexerTokens.IDENTIFIER)) {
-                    return new ASTIdentifierNode(context[LexerTokens.IDENTIFIER][0].image);
+                if (Object.prototype.hasOwnProperty.call(context, LexerToken.IDENTIFIER)) {
+                    return new ASTIdentifierNode(context[LexerToken.IDENTIFIER][0].image);
                 } else {
                     throw new Error('Failed to parse context.');
                 }
             }
 
             underscoreRule(context: CstTokenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, LexerTokens.UNDERSCORE)) {
+                if (Object.prototype.hasOwnProperty.call(context, LexerToken.UNDERSCORE)) {
                     return new ASTUnderscoreNode('_');
                 } else {
                     throw new Error('Failed to parse context.');

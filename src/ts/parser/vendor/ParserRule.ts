@@ -4,7 +4,7 @@
  * Please note: value format should be <code>camelCase</code> as these strings define the names of the corresponding
  * visitor methods names.
  */
-enum ParserRules {
+enum ParserRule {
     EXPRESSION = 'expressionRule',
     STRING_LITERAL = 'stringLiteralRule',
     DOUBLE_QUOTED_STRING_LITERAL = 'doubleQuotedStringLiteralRule',
@@ -14,4 +14,4 @@ enum ParserRules {
     UNDERSCORE = 'underscoreRule'
 }
 
-export default ParserRules;
+export default ParserRule;
