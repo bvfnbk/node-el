@@ -13,6 +13,20 @@ import ASTUnderscoreNode from '../ast/ASTUnderscoreNode';
 type CstChildrenDict = { [key: string]: CstNode | CstNode[] };
 type CstTokenDict = { [key: string]: IToken[] };
 
+function getParserRule(context: CstChildrenDict): ParserRules {
+    if (Object.prototype.hasOwnProperty.call(context, ParserRules.NUMBER_LITERAL)) {
+        return ParserRules.NUMBER_LITERAL;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.STRING_LITERAL)) {
+        return ParserRules.STRING_LITERAL;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.IDENTIFIER)) {
+        return ParserRules.IDENTIFIER;
+    } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.UNDERSCORE)) {
+        return ParserRules.UNDERSCORE;
+    } else {
+        throw new Error('Failed to parse context.');
+    }
+}
+
 export default class ChevrotainASTParser implements ExpressionLanguageParser {
     private readonly lexer: ChevrotainLexer;
     private readonly parser: ChevrotainCstParser;
@@ -29,19 +43,8 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
             }
 
             expressionRule(context: CstChildrenDict): ASTNode[] {
-                let rule = ParserRules.NUMBER_LITERAL;
-                if (Object.prototype.hasOwnProperty.call(context, ParserRules.NUMBER_LITERAL)) {
-                    rule = ParserRules.NUMBER_LITERAL;
-                } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.STRING_LITERAL)) {
-                    rule = ParserRules.STRING_LITERAL;
-                } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.IDENTIFIER)) {
-                    rule = ParserRules.IDENTIFIER;
-                } else if (Object.prototype.hasOwnProperty.call(context, ParserRules.UNDERSCORE)) {
-                    rule = ParserRules.UNDERSCORE;
-                } else {
-                    throw new Error('Failed to parse context.');
-                }
-                let contextElement: CstNode | CstNode[] = context[rule];
+                const rule = getParserRule(context);
+                const contextElement: CstNode | CstNode[] = context[rule];
 
                 if (Array.isArray(contextElement)) {
                     return contextElement.map(item => this.visit(item));
