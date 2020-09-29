@@ -97,7 +97,7 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
 
             underscoreRule(context: CstTokenDict): ASTNode {
                 if (Object.prototype.hasOwnProperty.call(context, LexerTokens.UNDERSCORE)) {
-                    return new ASTUnderscoreNode();
+                    return new ASTUnderscoreNode('_');
                 } else {
                     throw new Error('Failed to parse context.');
                 }
