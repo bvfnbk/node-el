@@ -8,5 +8,5 @@ module.exports = {
         '**/*.ts',
         '!**/node_modules/**'
     ],
-    coverageReporters: ['lcov', 'clover']
+    coverageReporters: ['lcov', 'clover', 'text']
 };

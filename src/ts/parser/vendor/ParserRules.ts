@@ -9,7 +9,9 @@ enum ParserRules {
     STRING_LITERAL = 'stringLiteralRule',
     DOUBLE_QUOTED_STRING_LITERAL = 'doubleQuotedStringLiteralRule',
     SINGLE_QUOTED_STRING_LITERAL = 'singleQuotedStringLiteralRule',
-    NUMBER_LITERAL = 'numberLiteralRule'
+    NUMBER_LITERAL = 'numberLiteralRule',
+    IDENTIFIER = 'identifierRule',
+    UNDERSCORE = 'underscoreRule'
 }
 
 export default ParserRules;

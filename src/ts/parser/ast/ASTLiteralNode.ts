@@ -1,5 +1,5 @@
-import {ASTNode} from '../ast';
 import ASTNodeVisitor from './ASTNodeVisitor';
+import ASTNode from './ASTNode';
 
 /**
  * Implement a base literal node.

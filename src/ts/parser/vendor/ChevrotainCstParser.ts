@@ -10,10 +10,14 @@ export default class ChevrotainCstParser extends CstParser {
     }
 
     public expression = this.RULE(ParserRules.EXPRESSION, () => {
-        this.OR([
-            {ALT: () => this.SUBRULE(this.stringLiteral)},
-            {ALT: () => this.SUBRULE(this.numberLiteral)}
-        ]);
+        this.MANY(() => {
+            this.OR([
+                {ALT: () => this.SUBRULE(this.identifier)},
+                {ALT: () => this.SUBRULE(this.underscore)},
+                {ALT: () => this.SUBRULE(this.stringLiteral)},
+                {ALT: () => this.SUBRULE(this.numberLiteral)}
+            ]);
+        });
     });
 
     public stringLiteral = this.RULE(ParserRules.STRING_LITERAL, () => {
@@ -33,5 +37,13 @@ export default class ChevrotainCstParser extends CstParser {
 
     public numberLiteral = this.RULE(ParserRules.NUMBER_LITERAL, () => {
         this.CONSUME(this.tokenMap[LexerTokens.NUMBER_LITERAL]);
+    });
+
+    public identifier = this.RULE(ParserRules.IDENTIFIER, () => {
+        this.CONSUME(this.tokenMap[LexerTokens.IDENTIFIER]);
+    });
+
+    public underscore = this.RULE(ParserRules.UNDERSCORE, () => {
+        this.CONSUME(this.tokenMap[LexerTokens.UNDERSCORE]);
     });
 }
