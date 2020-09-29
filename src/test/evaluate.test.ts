@@ -24,8 +24,9 @@ describe('Evaluating literals...', () => {
         expect(evaluate('\'another string literal with "double" quote.\''))
             .toEqual('another string literal with "double" quote.');
     });
+
+    test('Number literals are correctly evaluated.', () => {
+        expect(evaluate('1234')).toEqual('1234');
+    });
 });
 
-test('Number literals are correctly evaluated.', () => {
-    expect(evaluate('1234')).toEqual('1234');
-});
