@@ -54,9 +54,10 @@ export default class ChevrotainASTParser implements ExpressionLanguageParser {
             }
 
             stringLiteralRule(context: CstChildrenDict): ASTNode {
-                if (Object.prototype.hasOwnProperty.call(context, ParserRule.DOUBLE_QUOTED_STRING_LITERAL)) {
+                const rule = getParserRule(context);
+                if (rule === ParserRule.DOUBLE_QUOTED_STRING_LITERAL) {
                     return this.visit(context[ParserRule.DOUBLE_QUOTED_STRING_LITERAL]);
-                } else if (Object.prototype.hasOwnProperty.call(context, ParserRule.SINGLE_QUOTED_STRING_LITERAL)) {
+                } else if (rule === ParserRule.SINGLE_QUOTED_STRING_LITERAL) {
                     return this.visit(context[ParserRule.SINGLE_QUOTED_STRING_LITERAL]);
                 } else {
                     throw new Error('Failed to parse context.');
