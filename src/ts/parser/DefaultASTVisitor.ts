@@ -1,4 +1,6 @@
 import {ASTNode, ASTNodeVisitor, ASTNumberLiteralNode, ASTStringLiteralNode} from './ast';
+import ASTIdentifierNode from './ast/ASTIdentifierNode';
+import ASTUnderscoreNode from './ast/ASTUnderscoreNode';
 
 export default class DefaultASTVisitor implements ASTNodeVisitor {
     visit(node: ASTNode): string {
@@ -10,6 +12,14 @@ export default class DefaultASTVisitor implements ASTNodeVisitor {
     }
 
     visitString(node: ASTStringLiteralNode): string {
+        return node.content;
+    }
+
+    visitIdentifier(node: ASTIdentifierNode): string {
+        return node.content;
+    }
+
+    visitUnderscore(node: ASTUnderscoreNode): string {
         return node.content;
     }
 }
